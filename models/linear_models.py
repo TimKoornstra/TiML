@@ -1,7 +1,7 @@
 ## > Imports
 
 # > Local Imports
-from losses import mean_squared_error
+from losses import r_squared
 
 # > 3rd Party Imports
 import numpy as np
@@ -42,18 +42,19 @@ class LinearRegression:
         """
         
         # Initialize weights and bias
-        self.weights = np.zeros(X.shape[1])
-        self.bias = 0.0
+        if self.weights is None:
+            self.weights = np.zeros(X.shape[1])
+            self.bias = 0.0
 
         # Perform gradient descent
         for _ in range(epochs):
             y_pred = self.predict(X)
-
-            partial_w = (1 / X.shape[0]) * (2 * np.dot(X.T, y_pred - y))
-            partial_d = (1 / X.shape[0]) * (2 * np.sum(y_pred - y))
+            
+            partial_w = (1 / X.shape[0]) * (2 * np.dot(X.T, (y_pred - y)))
+            partial_b = (1 / X.shape[0]) * (2 * np.sum(y_pred - y))
 
             self.weights -= learning_rate * partial_w
-            self.bias -= learning_rate * partial_d
+            self.bias -= learning_rate * partial_b
         
         return self
 
@@ -71,10 +72,10 @@ class LinearRegression:
         y_pred : numpy.ndarray
             The predicted labels of shape (m,).
         """
-        
+
         return X.dot(self.weights) + self.bias
 
-    def score(self, X, y, loss=mean_squared_error):
+    def score(self, X, y, loss=r_squared):
         """
         Function to calculate the score of the model.
 
