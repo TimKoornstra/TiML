@@ -30,10 +30,6 @@ class LinearRegression:
             The input data of shape (m, n).
         y : numpy.ndarray
             The labels of shape (m,).
-        learning_rate : float
-            The learning rate for gradient descent.
-        epochs : int
-            The number of epochs to train the model.
 
         Returns:
         --------
