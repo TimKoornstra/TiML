@@ -8,7 +8,7 @@ import numpy as np
 
 class LinearRegression:
     """
-    Linear Regression using Gradient Descent
+    Linear Regression using Least Squares
 
     Attributes:
     -----------
@@ -22,7 +22,7 @@ class LinearRegression:
         self.weights = None
         self.bias = None
 
-    def fit(self, X , y, learning_rate=0.001, epochs=1000):
+    def fit(self, X , y):
         """
         Parameters:
         -----------
@@ -40,22 +40,18 @@ class LinearRegression:
         self : object
             Fitted estimator.
         """
-        
-        # Initialize weights and bias
-        if self.weights is None:
-            self.weights = np.zeros(X.shape[1])
-            self.bias = 0.0
 
-        # Perform gradient descent
-        for _ in range(epochs):
-            y_pred = self.predict(X)
-            
-            partial_w = (1 / X.shape[0]) * (2 * np.dot(X.T, (y_pred - y)))
-            partial_b = (1 / X.shape[0]) * (2 * np.sum(y_pred - y))
+        # First, add a bias term
+        X = np.c_[X, np.ones(X.shape[0])]
 
-            self.weights -= learning_rate * partial_w
-            self.bias -= learning_rate * partial_b
-        
+        # Calculate the weights and bias using Least Squares
+        # \beta = (X^T X)^{-1} X^T y
+        beta = np.dot(np.dot(np.linalg.inv(np.dot(X.T, X)), X.T), y)
+
+        # Store the weights and bias
+        self.weights = beta[:-1]
+        self.bias = beta[-1]
+
         return self
 
     def predict(self, X):
