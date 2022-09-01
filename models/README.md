@@ -34,7 +34,8 @@ This looks very similar to the previous formula but has a *y* vector as output, 
 ### Implementation
 
 To describe the implementation as best as possible, it is useful to add an illustrated example. We have the following data points in a scatter plot:
-blabla.png
+
+![afbeelding](https://user-images.githubusercontent.com/89044870/187948667-67e8afb9-c6ca-40a3-b96f-0aab26e1f8b8.png)
 
 It is obvious that we cannot come up with a linear function that describes all the data points exactly. Therefore, we want to approximate a linear function that describes the relationship between the x and the y axis as accurately as possible.
 
@@ -43,10 +44,12 @@ To do so, we use the least squares method. Without boring you with all of the de
 $\hat{\beta} = (X^TX)^{-1}X^TY$
 
 Note that $\hat{\beta}$ is the estimated coefficient matrix. The implementation of this in Python looks complicated but is actually very straightforward. Take a look at the snippet below:
-snippet.png
+
+![afbeelding](https://user-images.githubusercontent.com/89044870/187948748-7e06fec2-1813-4c35-a6f0-74ab91cb09a9.png)
 
 And we are done! Yes, this is everything that is needed to implement linear regression from scratch. If we run our linear regression model on the datapoints from before, we get the following linear estimation:
-results.png
+
+![afbeelding](https://user-images.githubusercontent.com/89044870/187948802-7072edb6-6fd5-4c05-852e-187e0cf07a2a.png)
 
 Which looks very good. However, to estimate the goodness of a fit, the R-squared measure is most often used for linear regression. If we use our R-squared loss function, we find a score of 0.842. Remember, the closer to 1, the more variance in the data is explained by the model. Given that our model has quite a bit of noise, I would say that an 84.2% explanation of variance is a very good result.
 
