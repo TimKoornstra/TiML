@@ -1,7 +1,7 @@
 ## > Imports
 
 # > Local Imports
-from losses import r_squared
+from losses.numerical import r_squared
 
 # > 3rd Party Imports
 import numpy as np
