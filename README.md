@@ -13,6 +13,15 @@ You will find that in each of the subfolders, there is also a corresponding `REA
 
 Please be advised that I am currently in the early stages of this project and the code in the repo, along with the given information probably contain many mistakes. If you stumble upon such mistakes or have any other questions, please, do not hesitate to send an email to tim.koornstra@gmail.com or create an “issue” on the GitHub page for this project.
 
+## Future methods
+- Decision trees
+- Logistic regression
+- Support vector machine
+- Single layer perceptron
+- Multi layer perceptron
+- K-nearest neighbors
+- K-means clustering
+
 ## Dependencies
 
 Currently, this project's only dependency is `NumPy`. It is strongly advised to install this library as well. This can be done as follows:
