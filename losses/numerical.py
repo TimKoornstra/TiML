@@ -1,7 +1,8 @@
-## > Imports
+# > Imports
 
 # > 3rd Party Imports
 import numpy as np
+
 
 def r_squared(y_true, y_pred):
     """
@@ -13,7 +14,7 @@ def r_squared(y_true, y_pred):
         The true labels.
     y_pred : numpy.ndarray
         The predicted labels.
-    
+
     Returns:
     --------
     score : float
@@ -21,6 +22,7 @@ def r_squared(y_true, y_pred):
     """
 
     return 1 - np.sum(np.square(y_pred - y_true)) / np.sum(np.square(y_true - np.mean(y_true)))
+
 
 def mean_squared_error(y_true, y_pred):
     """
@@ -32,7 +34,7 @@ def mean_squared_error(y_true, y_pred):
         The true labels.
     y_pred : numpy.ndarray
         The predicted labels.
-    
+
     Returns:
     --------
     score : float
@@ -40,6 +42,7 @@ def mean_squared_error(y_true, y_pred):
     """
 
     return np.mean(np.square(y_pred - y_true))
+
 
 def mean_absolute_error(y_true, y_pred):
     """
@@ -51,7 +54,7 @@ def mean_absolute_error(y_true, y_pred):
         The true labels.
     y_pred : numpy.ndarray
         The predicted labels.
-    
+
     Returns:
     --------
     score : float
@@ -59,4 +62,3 @@ def mean_absolute_error(y_true, y_pred):
     """
 
     return np.mean(np.abs(y_pred - y_true))
-    

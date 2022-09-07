@@ -1,10 +1,11 @@
-## > Imports
+# > Imports
 
 # > Local Imports
 from losses.numerical import r_squared
 
 # > 3rd Party Imports
 import numpy as np
+
 
 class LinearRegression:
     """
@@ -15,14 +16,14 @@ class LinearRegression:
     weights : numpy.ndarray of shape (n_features,)
         The weights of the model.
     bias : float
-        The bias of the model.  
+        The bias of the model.
     """
 
     def __init__(self):
         self.weights = None
         self.bias = None
 
-    def fit(self, X , y):
+    def fit(self, X, y):
         """
         Parameters:
         -----------
@@ -53,7 +54,7 @@ class LinearRegression:
     def predict(self, X):
         """
         Function to predict the output of the model.
-        
+
         Parameters:
         -----------
         X : numpy.ndarray
