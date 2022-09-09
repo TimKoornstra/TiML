@@ -42,7 +42,8 @@ class DecisionTree():
         # Store the depth of this node
         self.depth = depth
 
-    def fit(self, X, y, min_split=2, max_depth=None):
+    def fit(self, X, y, min_split=2,
+            max_depth=None, impurity_measure=gini_impurity):
         """
         Fit the decision tree on the data.
 
@@ -72,7 +73,7 @@ class DecisionTree():
         # We need to determine the best feature and feature value combination
         # to split on. To do that, we need to calculate the impurity
         # improvement for all combinations.
-        best_impurity = gini_impurity(y)
+        best_impurity = impurity_measure(y)
 
         for i in range(X.shape[1]):
             # Determine all possible splits and their corresponding split
@@ -94,8 +95,8 @@ class DecisionTree():
                 proportion_l = len(left_split_ind) / len(y)
                 proportion_r = len(right_split_ind) / len(y)
 
-                new_impurity = proportion_l * gini_impurity(y[left_split_ind])\
-                    + proportion_r * gini_impurity(y[right_split_ind])
+                new_impurity = proportion_l * impurity_measure(y[left_split_ind])\
+                    + proportion_r * impurity_measure(y[right_split_ind])
 
                 # If this beats our best impurity, save it
                 if new_impurity < best_impurity:
@@ -120,8 +121,10 @@ class DecisionTree():
         self.right = DecisionTree(depth=self.depth+1)
 
         # Grow the child nodes
-        self.left.fit(left_X, left_y, min_split, max_depth)
-        self.right.fit(right_X, right_y, min_split, max_depth)
+        self.left.fit(left_X, left_y, min_split,
+                      max_depth, impurity_measure)
+        self.right.fit(right_X, right_y, min_split,
+                       max_depth, impurity_measure)
 
         return self
 
