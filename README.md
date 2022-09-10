@@ -17,8 +17,8 @@ Please be advised that I am currently in the early stages of this project and th
 | Method                  | Programming done? | Documentation done? |
 |-------------------------|-------------------|---------------------|
 | Linear Regression       | ✅                 | ✅                   |
-| Decision Tree           | ✅                 | ❌                   |
-| Logistic Regression     | ⏳                 | ❌                   |
+| Decision Tree           | ✅                 | ⏳                   |
+| Logistic Regression     | ✅                 | ⏳                   |
 | Support Vector Machine  | ❌                 | ❌                   |
 | Single Layer Perceptron | ❌                 | ❌                   |
 | Multi Layer Perceptron  | ❌                 | ❌                   |
