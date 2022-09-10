@@ -31,7 +31,13 @@ Please be advised that I am currently in the early stages of this project and th
 Currently, this project's only dependency is `NumPy`. It is strongly advised to install this library as well. This can be done as follows:
 
 ```bash
-pip install numpy
+$ pip install numpy
+```
+
+Or - alternatively - installing all requirements at once can be done like so:
+
+```bash
+$ pip install -r requirements.txt
 ```
 
 ## How to run
