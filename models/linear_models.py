@@ -91,12 +91,40 @@ class LinearRegression:
 
 
 class LogisticRegression:
+    """
+    Logistic Regression using gradient descent
+
+    Attributes:
+    -----------
+    weights : numpy.ndarray of shape (n_features,)
+        The weights of the model.
+    bias : float
+        The bias of the model.
+    """
 
     def __init__(self):
         self.weights = None
         self.bias = None
 
     def fit(self, X, y, epochs=100, lr=0.001):
+        """
+        Parameters:
+        -----------
+        X : numpy.ndarray
+            The input data of shape (m, n).
+        y : numpy.ndarray
+            The labels of shape (m,).
+        epochs : int
+            The amount of epochs used to optimize the regressor.
+        lr : numpy.float
+            The learning rate used in the gradient descent.
+
+        Returns:
+        --------
+        self : object
+            Fitted estimator.
+        """
+
         # Conversion to np.float128 to mitigate some exp OverflowErrors
         X = np.array(X, dtype=np.float128)
 
@@ -122,6 +150,24 @@ class LogisticRegression:
         return self
 
     def predict(self, X, threshold=0.5):
+        """
+        Function to predict the output of the model.
+
+        Parameters:
+        -----------
+        X : numpy.ndarray
+            The input data of shape (m, n).
+        threshold : numpy.float
+            The cut-off to determine which values belong to which class.
+            Anything smaller than the threshold is considered class 0, whereas
+            anything greater than or equal to the threshold is class 1.
+
+        Returns:
+        --------
+        y_pred : numpy.ndarray
+            The predicted labels of shape (m,).
+        """
+
         # Conversion to np.float128 to mitigate some exp OverflowErrors
         X = np.array(X, dtype=np.float128)
 
