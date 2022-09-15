@@ -5,6 +5,7 @@ We have arrived at the good part: actual machine learning! Well, not exactly… 
 ## In this file
 
 - [Linear Regression](#linear-regression)
+- [Logistic Regression](#logistic-regression)
 - [Decision Trees](#decision-trees)
 
 ## Linear Regression
@@ -52,6 +53,60 @@ And we are done! Yes, this is everything that is needed to implement linear regr
 ![afbeelding](https://user-images.githubusercontent.com/89044870/187948802-7072edb6-6fd5-4c05-852e-187e0cf07a2a.png)
 
 Which looks very good. However, to estimate the goodness of a fit, the R-squared measure is most often used for linear regression. If we use our R-squared loss function, we find a score of 0.842. Remember, the closer to 1, the more variance in the data is explained by the model. Given that our model has quite a bit of noise, I would say that an 84.2% explanation of variance is a very good result.
+
+### When to use it
+
+Linear regression works best when there is clear linearity in your data. It is, however, not always easy to visualize this (e.g. when the dimensionality becomes too big). Nonetheless, when facing a regression problem it is often useful to start with linear regression to test for linearity and discover how well this computationally efficient, simple, explainable method can fit your data.
+
+***Example use cases***
+
+- Predicting how the change in the price of product x will impact the sales of that product.
+- Determining the crop yield given the amount of fertilizer and water that you use.
+- Modeling the relationship between income and happiness.
+- Many more…
+
+## Logistic Regression
+
+I hope you paid a lot of attention to the explanation of linear regression since logistic regression is very similar to it. Whereas linear regression is used to measure the relationship between a **scalar** response and one or multiple explanatory variables, logistic regression is used to measure the **probability** of an event given one or multiple explanatory variables. Another key difference is that this probability is not linear, but uses the logistic function to describe the probability of an event happening (more on that later).
+
+Let’s look at an example. Say we want to describe the relationship between hours of studying and the probability of passing a class. In my experience – and I assume many others share that experience – if I spend more hours studying, I have a higher chance of passing a class. However, studying for 1 hour instead of not at all does not improve my grasp of the material (and therefore my chances of passing the class) as much as, say, studying for 3 hours instead of 2. Conversely, there is also a limit to when studying for longer only improves my chances marginally. The relationship is thus not linear but can be described using the logistic function.
+
+As you can imagine, this probability can be used to predict a (binary) class. In the case of the previous example, we might say that if a student has a probability of passing the class that is above 50% will be classified as “will pass the class”, whereas anything below that probability will be classified as “will fail the class”.
+
+Now, onto the math. You may recall that for linear regression, we tried to estimate the coefficients (weights vector) for the function $y=\textbf{w}^T\textbf{x}$. Logistic regression still uses the same concept of trying to estimate the coefficients, but also takes the logistic function into account, since we are trying to predict a class and not a real number. So, we have to optimize for the probability of the class. The logistic function can be described as follows:
+
+$p(x) = \frac{1}{1 + e^{-(\textbf{w}^T\textbf{x})}}$
+
+As you can see, this function uses the aforementioned linear function ($y=\textbf{w}^T\textbf{x}$) to estimate the probability of this datapoint labeled as class 1 by scaling it from 0 to 1.
+
+### Implementation
+
+The most straightforward method of solving a logistic progression problem is by approximating the coefficients using “gradient descent”. This is an optimization algorithm that tries to find a local minimum of an error or loss function. It should be noted that the weights for linear regression can also be estimated using this method. The most common error function used in binary classification is the binary cross-entropy function. For this implementation, it is not necessary to know the specifics, but just how to calculate the partial derivatives with regards to the bias and the weights (i.e. the gradient).
+
+$\partial \textbf{w} = \frac{1}{m}(\hat{\textbf{y}}-\textbf{y})\textbf{x}^T$
+
+$\partial \textbf{w} = \frac{1}{m}\sum(\hat{\textbf{y}}-\textbf{y})$
+
+Where *m* denotes the number of elements in ***x***.
+
+Now that we know how to calculate the partial derivatives of the binary cross-entropy function with regard to the weights and bias, we can update our weights and bias accordingly. To do so, we first need to set a *learning rate*. This means that we have to determine how much we want to change our weights each epoch. If we set the learning rate too high, we can get undesirable divergent behavior, whereas if the learning rate is too low, training the model will take much longer than necessary. The learning rate is usually a value between 0.1 and 0.0001. This is not a value that you can know beforehand but has to be estimated using trial-and-error.
+
+After having set the learning rate, we have everything we need to build our logistic regressor. We start by initializing our weights and bias to zeros. Then, we need to first calculate the probabilities of each datapoint in our dataset using the sigmoid function. Next, we calculate the partial derivatives and update our weights using the learning rate we set.
+We can implement this in Python as follows:
+
+image.png
+
+That is it! Now, the only thing that rests us, is the prediction. To predict a datapoint, we simply calculate the sigmoid for that datapoint again, and if that value is above a certain threshold, we classify the datapoint as 1. Otherwise, we classify it as 0.
+
+### When to use it
+
+As stated before, this implementation of logistic regression can only be used for binary classification problems. Again, it is a very useful, simple, and explainable method that can be used as a starting point for many classification problems. It might surprise you how well this simple model relates to many (seemingly difficult) classification problems.
+
+***Example use cases***
+
+- Predicting how many hours I need to study to pass my class.
+- Predicting the likelihood of a disease given the patient's symptoms.
+- Many other binary classification problems…
 
 ## Decision Trees
 

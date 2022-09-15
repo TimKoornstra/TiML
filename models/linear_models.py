@@ -140,7 +140,7 @@ class LogisticRegression:
             # Calculate the difference between prediction and actual once
             difference = sigmoid - y
 
-            # Calculate the difference w.r.t. the weights and bias vectors
+            # Calculate the derivatives w.r.t. the weights and bias vectors
             dW = 1/X.shape[0] * np.dot(X.T, difference)
             db = 1/X.shape[0] * np.sum(difference)
 
@@ -155,6 +155,8 @@ class LogisticRegression:
         A helper function to calculate the sigmoid of a value. This function
         is necessary to mitigate the overflow errors that occur when the
         sigmoid is negative or positive infinity.
+        Credit for exp-normalize trick goes to
+        https://timvieira.github.io/blog/post/2014/02/11/exp-normalize-trick/.
 
         Parameters:
         -----------
@@ -165,6 +167,7 @@ class LogisticRegression:
         --------
         The sigmoid value for x.
         """
+
         if x >= 0:
             z = np.exp(-x)
             return 1 / (1 + z)
