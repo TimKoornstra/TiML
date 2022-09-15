@@ -125,23 +125,25 @@ class LogisticRegression:
             Fitted estimator.
         """
 
-        # Conversion to np.float128 to mitigate some exp OverflowErrors
-        X = np.array(X, dtype=np.float128)
+        # Conversion to np.longdouble to mitigate some exp OverflowErrors
+        X = np.array(X, dtype=np.longdouble)
 
         # If the models has not been trained yet,
         # initialize the weights and bias.
         if not self.weights and not self.bias:
-            self.weights = np.zeros(X.shape[1], dtype=np.float128)
-            self.bias = np.float128(0.0)
+            self.weights = np.zeros(X.shape[1], dtype=np.longdouble)
+            self.bias = np.longdouble(0.0)
 
         # Perform Gradient Descent by looping over epochs
         for _ in range(epochs):
             # Calculate the sigmoid activation
             sigmoid = 1 / (1 + np.exp(-(X.dot(self.weights) + self.bias)))
 
+            difference = sigmoid - y
+
             # Calculate the difference w.r.t. the weights and bias vectors
-            dW = np.dot(X.T, (sigmoid - y))
-            db = 1/X.shape[0] * np.sum(sigmoid - y)
+            dW = 1/X.shape[0] * np.dot(X.T, difference)
+            db = 1/X.shape[0] * np.sum(difference)
 
             # Update weights and bias using the learning rate
             self.weights -= lr * dW
@@ -168,8 +170,8 @@ class LogisticRegression:
             The predicted labels of shape (m,).
         """
 
-        # Conversion to np.float128 to mitigate some exp OverflowErrors
-        X = np.array(X, dtype=np.float128)
+        # Conversion to np.longdouble to mitigate some exp OverflowErrors
+        X = np.array(X, dtype=np.longdouble)
 
         # Calculate the sigmoid
         y_sigmoid = 1 / (1 + np.exp(-(X.dot(self.weights) + self.bias)))
