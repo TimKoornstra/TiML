@@ -18,7 +18,7 @@ Please be advised that I am currently in the early stages of this project and th
 |-------------------------|-------------------|---------------------|
 | Linear Regression       | ✅                 | ✅                   |
 | Decision Tree           | ✅                 | ⏳                   |
-| Logistic Regression     | ✅                 | ⏳                   |
+| Logistic Regression     | ✅                 | ✅                   |
 | Support Vector Machine  | ❌                 | ❌                   |
 | Single Layer Perceptron | ❌                 | ❌                   |
 | Multi Layer Perceptron  | ❌                 | ❌                   |
