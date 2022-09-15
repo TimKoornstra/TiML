@@ -1,6 +1,7 @@
 # > Imports
 
 # > Local Imports
+from numbers import Number
 from losses.numerical import r_squared
 
 # > 3rd Party Imports
@@ -106,7 +107,7 @@ class LogisticRegression:
         self.weights = None
         self.bias = None
 
-    def fit(self, X, y, epochs=100, lr=0.001):
+    def fit(self, X, y, epochs=1000, lr=0.001):
         """
         Parameters:
         -----------
@@ -125,20 +126,19 @@ class LogisticRegression:
             Fitted estimator.
         """
 
-        # Conversion to np.longdouble to mitigate some exp OverflowErrors
-        X = np.array(X, dtype=np.longdouble)
-
         # If the models has not been trained yet,
         # initialize the weights and bias.
         if not self.weights and not self.bias:
-            self.weights = np.zeros(X.shape[1], dtype=np.longdouble)
-            self.bias = np.longdouble(0.0)
+            self.weights = np.zeros(X.shape[1])
+            self.bias = 0.0
 
         # Perform Gradient Descent by looping over epochs
         for _ in range(epochs):
             # Calculate the sigmoid activation
-            sigmoid = 1 / (1 + np.exp(-(X.dot(self.weights) + self.bias)))
+            sigmoid = np.array([self._sigmoid(x) for x in \
+                (np.matmul(self.weights, X.T) + self.bias)])
 
+            # Calculate the difference between prediction and actual once
             difference = sigmoid - y
 
             # Calculate the difference w.r.t. the weights and bias vectors
@@ -151,6 +151,28 @@ class LogisticRegression:
 
         return self
 
+    def _sigmoid(self, x):
+        """
+        A helper function to calculate the sigmoid of a value. This function
+        is necessary to mitigate the overflow errors that occur when the
+        sigmoid is negative or positive infinity.
+
+        Parameters:
+        -----------
+        x : Number
+            The value for which we want to calculate the sigmoid.
+        
+        Returns:
+        --------
+        The sigmoid value for x.
+        """
+        if x >= 0:
+            z = np.exp(-x)
+            return 1 / (1 + z)
+        else:
+            z = np.exp(x)
+            return z / (1 + z)
+
     def predict(self, X, threshold=0.5):
         """
         Function to predict the output of the model.
@@ -159,7 +181,7 @@ class LogisticRegression:
         -----------
         X : numpy.ndarray
             The input data of shape (m, n).
-        threshold : numpy.float
+        threshold : float
             The cut-off to determine which values belong to which class.
             Anything smaller than the threshold is considered class 0, whereas
             anything greater than or equal to the threshold is class 1.
@@ -170,11 +192,9 @@ class LogisticRegression:
             The predicted labels of shape (m,).
         """
 
-        # Conversion to np.longdouble to mitigate some exp OverflowErrors
-        X = np.array(X, dtype=np.longdouble)
-
-        # Calculate the sigmoid
-        y_sigmoid = 1 / (1 + np.exp(-(X.dot(self.weights) + self.bias)))
+        # Calculate the sigmoid activation
+        y_sigmoid = np.array([self._sigmoid(x) for x in \
+            (np.matmul(self.weights, X.T) + self.bias)])
 
         # Return 0 if value < threshold, else 1
         return np.where(y_sigmoid < threshold, 0, 1)
