@@ -94,7 +94,7 @@ Now that we know how to calculate the partial derivatives of the binary cross-en
 After having set the learning rate, we have everything we need to build our logistic regressor. We start by initializing our weights and bias to zeros. Then, we need to first calculate the probabilities of each datapoint in our dataset using the sigmoid function. Next, we calculate the partial derivatives and update our weights using the learning rate we set.
 We can implement this in Python as follows:
 
-image.png
+![afbeelding](https://user-images.githubusercontent.com/89044870/190502903-95d58415-7a30-4b54-bc4d-55c67931f9ba.png)
 
 That is it! Now, the only thing that rests us, is the prediction. To predict a datapoint, we simply calculate the sigmoid for that datapoint again, and if that value is above a certain threshold, we classify the datapoint as 1. Otherwise, we classify it as 0.
 
