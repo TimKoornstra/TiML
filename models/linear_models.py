@@ -1,7 +1,6 @@
 # > Imports
 
 # > Local Imports
-from numbers import Number
 from losses.numerical import r_squared
 
 # > 3rd Party Imports
