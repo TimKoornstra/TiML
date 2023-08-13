@@ -4,10 +4,10 @@
 import numpy as np
 
 # > Local Imports
-from losses.categorical import gini_impurity
+from TiML.losses.categorical import gini_impurity
 
 
-class DecisionTree():
+class DecisionTree:
     """
     A simple implementation of a Decision Tree
 

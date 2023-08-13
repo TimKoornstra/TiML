@@ -8,17 +8,16 @@ I know that I am basically reinventing the wheel with a lot of these implementat
 
 ## About this repository
 
-With this in mind, I have attempted to document the implementation of various machine learning algorithms, along with explanations, information, and some illustrations. Most Python implementations require the use of the NumPy library. It is highly recommended that you install this library as well, if you want to replicate any of my work. In this repository, I have also included a `.pdf` file that contains more all the combined information that I have collected and written down for this project, along with some of my thoughts. The actual code in this document might differ slightly from some of the code snippets included in this repo. The code, however, does not work any differently. It has purely been made easier to read for the layman here.
-You will find that in each of the subfolders, there is also a corresponding `README.md` file that contains (excerpts of) the relevant parts in the `.pdf` file.
+With this in mind, I have attempted to document the implementation of various machine learning algorithms, along with explanations, information, and some illustrations. Most Python implementations require the use of the NumPy library. It is highly recommended that you install this library as well, if you want to replicate any of my work. In this repository, I have included an "examples" folder where you can find more elaborate explanations and examples of the code. The actual code in those notebooks might differ slightly from some of the code snippets included in this repo. The code, however, does not work any differently. It has purely been made easier to read for the layman here.
 
 Please be advised that I am currently in the early stages of this project and the code in the repo, along with the given information probably contain many mistakes. If you stumble upon such mistakes or have any other questions, please, do not hesitate to send an email to tim.koornstra@gmail.com or create an “issue” on the GitHub page for this project.
 
 ## Methods in this repository
-| Method                  | Programming done? | Documentation done? |
+| Method                  | Programming done? | Example notebook done? |
 |-------------------------|-------------------|---------------------|
 | Linear Regression       | ✅                 | ✅                   |
-| Decision Tree           | ✅                 | ⏳                   |
-| Logistic Regression     | ✅                 | ✅                   |
+| Decision Tree           | ✅                 | ❌                   |
+| Logistic Regression     | ✅                 | ❌                   |
 | Support Vector Machine  | ❌                 | ❌                   |
 | Single Layer Perceptron | ❌                 | ❌                   |
 | Multi Layer Perceptron  | ❌                 | ❌                   |
@@ -28,26 +27,24 @@ Please be advised that I am currently in the early stages of this project and th
 
 ## Dependencies
 
+If you would like to build the project from source, you would need to install some requirements.
+
 Currently, this project's only dependency is `NumPy`. It is strongly advised to install this library as well. This can be done as follows:
 
 ```bash
-$ pip install numpy
+pip install numpy
 ```
 
 Or - alternatively - installing all requirements at once can be done like so:
 
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## How to run
 
 1. Clone the repository
-2. Create a `main.py` file in the root of this repo
-3. In this file, import any files that you wish to use. To import, use:
-
-    ```py
-    from folder.file import *
-    ```
-
-4. Run your `main.py` file using your preprocessed data and the imported libraries
+2. Install the library using pip by running
+```bash
+pip install .
+```
